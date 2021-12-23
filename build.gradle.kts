@@ -25,6 +25,8 @@ dependencies {
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("io.kotest:kotest-runner-junit5")
+	testImplementation("io.kotest:kotest-assertions-core")
 }
 
 tasks.withType<KotlinCompile> {

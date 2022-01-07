@@ -22,9 +22,19 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("org.testng:testng:7.1.0")
+	implementation("org.projectlombok:lombok:1.18.20")
+	implementation("org.projectlombok:lombok:1.18.20")
+	implementation("org.projectlombok:lombok:1.18.20")
+	implementation ("org.springframework.boot:spring-boot-starter-actuator")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("io.kotest:kotest-runner-junit5:5.0.2")
+	testImplementation("io.kotest:kotest-assertions-core:5.0.2")
+	testImplementation("io.kotest:kotest-extensions-spring:4.4.3")
+
+
 }
 
 tasks.withType<KotlinCompile> {

@@ -1,3 +1,15 @@
-
+---
+spring:
+  config:
+    activate:
+      on-profile: set1
 server:
-  port: 443
+  port: 8081
+
+---
+spring:
+  config:
+    activate:
+      on-profile: set2
+server:
+  port: 8082

@@ -5,7 +5,6 @@ spring:
       on-profile: set1
 server:
   port: 8081
-  adress: 0.0.0.0
 ---
 spring:
   config:
@@ -13,4 +12,3 @@ spring:
       on-profile: set2
 server:
   port: 8082
-  adress: 0.0.0.0

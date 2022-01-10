@@ -17,6 +17,6 @@ class WebRestController {
 
     @GetMapping("/profile")
     fun getProfile(): String{
-        return Arrays.stream(env.activeProfiles).findFirst().orElse("");
+        return Arrays.stream(env.activeProfiles).findFirst().orElse("")
     }
 }

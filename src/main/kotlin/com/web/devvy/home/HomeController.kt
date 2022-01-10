@@ -8,7 +8,6 @@ class HomeController {
 
    @GetMapping("/")
    fun home(): String {
-       Thread.sleep(60000)
        return "hello"
    }
 }

@@ -14,8 +14,6 @@ class HomeController {
 
    @GetMapping("/")
    fun home(): String {
-       val x = 1
-       Thread.sleep(120000)
        return "hello" + Arrays.stream(env.activeProfiles).findFirst().orElse("")
    }
 }

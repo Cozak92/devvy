@@ -20,9 +20,4 @@ class UesrController {
     fun getOneUser(id: Int):String{
         return "신승혁,30"
     }
-
-    @PostMapping("/user")
-    fun registerOneUser(){
-
-    }
 }

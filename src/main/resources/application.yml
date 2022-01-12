@@ -5,6 +5,7 @@ spring:
       on-profile: set1
 server:
   port: 8081
+  shutdown: graceful
 ---
 spring:
   config:
@@ -12,3 +13,4 @@ spring:
       on-profile: set2
 server:
   port: 8082
+  shutdown: graceful

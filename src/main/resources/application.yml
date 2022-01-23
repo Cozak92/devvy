@@ -3,39 +3,11 @@ spring:
   config:
     activate:
       on-profile: set1
-server:
-  port: 8081
-  shutdown: graceful
-datasource:
-  url: jdbc:mariadb://devvydb-1.ccul8tlktijr.ap-northeast-2.rds.amazonaws.com:3306/devyyyyy
-  username: admin
-  password: tlstmdgur11
-  driver-class-name: org.mysql.jdbc.Driver
-
-jpa:
-  hibernate:
-    ddl-auto: none
-    jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
----
-spring:
-  config:
-    activate:
-      on-profile: set2
-server:
-  port: 8082
-  shutdown: graceful
   datasource:
-    url: jdbc:mariadb://devvydb-1.ccul8tlktijr.ap-northeast-2.rds.amazonaws.com:3306/devyyyyy
+    url: jdbc:mysql://devvydb-1.ccul8tlktijr.ap-northeast-2.rds.amazonaws.com:3306/devyyyyy
     username: admin
     password: tlstmdgur11
-    driver-class-name: org.mysql.jdbc.Driver
-
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
@@ -43,3 +15,32 @@ server:
     properties:
       hibernate:
         format_sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database: mysql
+server:
+  port: 8081
+  shutdown: graceful
+---
+spring:
+  config:
+    activate:
+      on-profile: set2
+  datasource:
+    url: jdbc:mysql://devvydb-1.ccul8tlktijr.ap-northeast-2.rds.amazonaws.com:3306/devyyyyy
+    username: admin
+    password: tlstmdgur11
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database: mysql
+server:
+  port: 8082
+  shutdown: graceful
+
+

@@ -6,6 +6,22 @@ spring:
 server:
   port: 8081
   shutdown: graceful
+datasource:
+  url: jdbc:mariadb://devvydb-1.ccul8tlktijr.ap-northeast-2.rds.amazonaws.com:3306/devyyyyy
+  username: admin
+  password: tlstmdgur11
+  driver-class-name: org.mysql.jdbc.Driver
+
+jpa:
+  hibernate:
+    ddl-auto: none
+    jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 ---
 spring:
   config:
@@ -14,3 +30,16 @@ spring:
 server:
   port: 8082
   shutdown: graceful
+  datasource:
+    url: jdbc:mariadb://devvydb-1.ccul8tlktijr.ap-northeast-2.rds.amazonaws.com:3306/devyyyyy
+    username: admin
+    password: tlstmdgur11
+    driver-class-name: org.mysql.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true

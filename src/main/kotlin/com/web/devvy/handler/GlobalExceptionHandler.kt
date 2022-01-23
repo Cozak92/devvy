@@ -16,9 +16,7 @@ class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException::class)
     fun handleMethodArgumentNotValidException(e: MethodArgumentNotValidException, request: HttpServletRequest): ResponseEntity<ErrorResponse> {
         val errors = mutableListOf<Error>()
-        println(e.bindingResult)
         e.bindingResult.allErrors.forEach { errorObject ->
-            println(errorObject)
             val error = Error().apply {
                 this.field = (errorObject as FieldError).field
                 this.message = errorObject.defaultMessage
@@ -26,7 +24,6 @@ class GlobalExceptionHandler {
             }
             errors.add(error)
         }
-
         val errorResponse = ErrorResponse().apply {
             this.resultCode = "FAIL"
             this.httpStatus = HttpStatus.BAD_REQUEST.value().toString()

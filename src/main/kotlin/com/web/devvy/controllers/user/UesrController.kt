@@ -1,12 +1,18 @@
-package com.web.devvy.user
+package com.web.devvy.controllers.user
 
+import com.web.devvy.Dto.User.UserDto.UserRequest
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
-@Controller
+@RestController
+@RequestMapping("user")
 class UesrController {
+
+    @PostMapping
+    fun postUser(@RequestBody @Valid UserRequest: UserRequest): String{
+        return "Valid Test"
+    }
 
     @GetMapping("/user")
     @ResponseBody

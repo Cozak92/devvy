@@ -7,6 +7,16 @@ plugins {
 	kotlin("plugin.spring") version "1.6.0"
 	kotlin("plugin.jpa") version "1.6.0"
 }
+allOpen {
+	annotation("javax.persistence.Entity")
+	annotation("javax.persistence.MappedSuperclass")
+	annotation("javax.persistence.Embeddable")
+}
+noArg {
+	annotation("javax.persistence.Entity")
+	annotation("javax.persistence.MappedSuperclass")
+	annotation("javax.persistence.Embeddable")
+}
 
 group = "com.web"
 version = "0.0.1-SNAPSHOT"
@@ -26,7 +36,9 @@ dependencies {
 	implementation("org.projectlombok:lombok:1.18.20")
 	implementation("org.projectlombok:lombok:1.18.20")
 	implementation("org.projectlombok:lombok:1.18.20")
+	implementation ("mysql:mysql-connector-java")
 	implementation ("org.springframework.boot:spring-boot-starter-actuator")
+	implementation ("org.springframework.boot:spring-boot-starter-validation")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")

@@ -6,6 +6,6 @@ import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotEmpty
 
 class UserDto {
-    data class UserRequest(@field:NotEmpty val name: String, @field:Email val email: String)
+    data class UserRequest(@field:NotEmpty val name: String, @field:Email val email: String, val is_deleted: Boolean?)
     data class UserResponse(val returnCode: HttpStatus, val returnMessage: String)
 }

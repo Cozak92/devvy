@@ -1,11 +1,43 @@
 package com.web.devvy.Dto.User
 
-import org.springframework.http.HttpStatus
+import com.web.devvy.entity.Authority
+import com.web.devvy.entity.User
 import javax.validation.constraints.Email
-import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotEmpty
 
 class UserDto {
-    data class UserRequest(@field:NotEmpty val name: String, @field:Email val email: String, val is_deleted: Boolean?)
-    data class UserResponse(val returnCode: HttpStatus, val returnMessage: String)
+    data class UserJoinRequest(
+        @field:NotEmpty val name: String,
+        @field:NotEmpty val password: String,
+        @field:NotEmpty val username: String,
+        @field:Email val email: String,
+        @field:NotEmpty val authorities: Authority?,
+        val is_deleted: Boolean?,
+
+    )
+
+
+    data class UserResponse(
+        @field:NotEmpty val name: String,
+        @field:NotEmpty val username: String,
+        @field:Email val email: String,
+        @field:NotEmpty val authorities: Set<Authority>,
+    ) {
+        companion object{
+            fun from(user: User?): UserResponse?{
+                return user?.let {
+                    UserResponse(
+                        name = user.name,
+                        username = user.username,
+                        email = user.email,
+                        authorities = user.authorities
+                    )
+                }
+            }
+        }
+
+
+    }
+
+    data class LoginRequest(@field:NotEmpty val username: String, @field:NotEmpty var password: String)
 }

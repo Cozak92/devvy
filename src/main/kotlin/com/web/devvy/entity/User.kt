@@ -1,9 +1,9 @@
 package com.web.devvy.entity
 
-import com.web.devvy.Dto.User.UserDto.*
 import lombok.AllArgsConstructor
 import lombok.NoArgsConstructor
 import javax.persistence.*
+import com.web.devvy.entity.Authority
 
 @Entity
 @Table(name = "user")
@@ -32,12 +32,12 @@ class User(
     @ManyToMany
     @JoinTable(
         name = "user_authority",
-        joinColumns = [JoinColumn(name = "id", referencedColumnName = "id") ],
-        inverseJoinColumns = [ JoinColumn(name = "authority_name", referencedColumnName = "authority_name") ])
-    var authorities: Set<Authority>
+        joinColumns = [JoinColumn(name = "id", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "authority_name", referencedColumnName = "authority_name")]
+    )
+    var authorities: MutableSet<Authority>
 
 ) {
-
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

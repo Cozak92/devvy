@@ -18,19 +18,19 @@ class GlobalExceptionHandler {
         val errors = mutableListOf<Error>()
         e.bindingResult.allErrors.forEach { errorObject ->
             val error = Error().apply {
-                this.field = (errorObject as FieldError).field
-                this.message = errorObject.defaultMessage
-                this.value = errorObject.rejectedValue
+                field = (errorObject as FieldError).field
+                message = errorObject.defaultMessage
+                value = errorObject.rejectedValue
             }
             errors.add(error)
         }
         val errorResponse = ErrorResponse().apply {
-            this.resultCode = "FAIL"
-            this.httpStatus = HttpStatus.BAD_REQUEST.value().toString()
-            this.httpMethod = request.method
-            this.message = "요청에 에러가 발생하였습니다."
-            this.path = request.requestURI.toString()
-            this.timestamp = LocalDateTime.now()
+            resultCode = "FAIL"
+            httpStatus = HttpStatus.BAD_REQUEST.value().toString()
+            httpMethod = request.method
+            message = "요청에 에러가 발생하였습니다."
+            path = request.requestURI.toString()
+            timestamp = LocalDateTime.now()
             this.errors = errors
         }
 

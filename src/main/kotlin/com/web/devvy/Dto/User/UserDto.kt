@@ -7,11 +7,10 @@ import javax.validation.constraints.NotEmpty
 
 class UserDto {
     data class UserJoinRequest(
-        @field:NotEmpty val name: String,
-        @field:NotEmpty val password: String,
-        @field:NotEmpty val username: String,
-        @field:Email val email: String,
-        @field:NotEmpty val authorities: Authority?,
+        @field:NotEmpty val name: String?,
+        @field:NotEmpty val password: String?,
+        @field:NotEmpty val username: String?,
+        @field:Email val email: String?,
         val is_deleted: Boolean?,
 
     )

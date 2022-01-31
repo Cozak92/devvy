@@ -32,7 +32,7 @@ class SecurityConfig(
     override fun configure(web: WebSecurity) {
         web.ignoring()
             .antMatchers(
-                "/error/**", "/","/profile", "/api/authenticate"
+                "/error/**", "/","/profile", "/api/authenticate", "/actuator/health"
             )
     }
 

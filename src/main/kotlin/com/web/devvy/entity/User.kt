@@ -18,7 +18,7 @@ class User(
     var username: String,
 
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 300)
     var password: String,
 
     @Column(nullable = false, length = 25)
@@ -56,9 +56,5 @@ class User(
 
     override fun toString(): String {
         return "User(id=$id, name='$name', email='$email' is_deleted='$is_deleted)"
-    }
-
-    fun isDeleted(): Boolean {
-        return is_deleted;
     }
 }

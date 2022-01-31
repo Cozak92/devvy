@@ -11,15 +11,18 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/api/user")
-class UserController {
+class UserController(private val userService: UserService) {
 
-    @Autowired
-    private lateinit var userService: UserService
 
     @GetMapping
     @PreAuthorize("hasAnyRole('USER','ADMIN')")
     fun getMyUserInfo(): ResponseEntity<UserResponse> {
         return ResponseEntity.ok(userService.getMyUserWithAuthorities())
+    }
+
+    @PostMapping
+    fun signup(@RequestBody @Valid userRequest: UserJoinRequest): ResponseEntity<UserResponse> {
+        return ResponseEntity.ok(userService.signup(userRequest));
     }
 
     @GetMapping("/{username}")
@@ -28,9 +31,5 @@ class UserController {
         return ResponseEntity.ok(userService.getUserWithAuthorities(username))
     }
 
-    @PostMapping
-    fun signup(@RequestBody @Valid userRequest: UserJoinRequest): ResponseEntity<UserResponse> {
-        return ResponseEntity.ok(userService.signup(userRequest));
-    }
 
 }

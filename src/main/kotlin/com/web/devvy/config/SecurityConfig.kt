@@ -32,7 +32,7 @@ class SecurityConfig(
     override fun configure(web: WebSecurity) {
         web.ignoring()
             .antMatchers(
-                "/error", "/","/profile","/actuator/**"
+                "/error/**", "/","/profile", "/api/authenticate"
             )
     }
 
@@ -59,7 +59,7 @@ class SecurityConfig(
 
             .and()
             .authorizeRequests()
-            .antMatchers("/api").permitAll()
+            .antMatchers("/api/**").permitAll()
             .anyRequest().authenticated()
 
             .and()

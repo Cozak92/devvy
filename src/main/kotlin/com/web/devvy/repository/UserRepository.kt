@@ -10,5 +10,5 @@ interface UserRepository : JpaRepository<User, Long> {
 
     fun findByEmail(email: String): User?
     @EntityGraph(attributePaths = ["authorities"])
-    fun findOneWithAuthoritiesByUsername(username: String): User?
+    fun findOneWithAuthoritiesByUsername(name: String): User?
 }

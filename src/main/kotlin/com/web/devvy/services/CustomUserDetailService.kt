@@ -22,14 +22,14 @@ class CustomUserDetailsService(private val userRepository: UserRepository) : Use
    }
 
    private fun createUser(username: String, user: User): org.springframework.security.core.userdetails.User {
-      if (!user.isDeleted()) {
+      if (user.is_deleted) {
          throw RuntimeException("$username -> 활성화되어 있지 않습니다.")
       }
       val grantedAuthorities: List<GrantedAuthority> = user.authorities.stream()
          .map { authority -> SimpleGrantedAuthority(authority.authorityName) }
          .collect(Collectors.toList())
       return org.springframework.security.core.userdetails.User(
-         user.name,
+         user.username,
          user.password,
          grantedAuthorities
       )

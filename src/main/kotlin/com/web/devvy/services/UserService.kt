@@ -16,14 +16,14 @@ import java.util.*
 class UserService(private val userRepository: UserRepository, private val passwordEncoder: PasswordEncoder) {
     @Transactional
     fun signup(UserJoinRequest: UserJoinRequest): UserResponse? {
-        if (userRepository.findOneWithAuthoritiesByUsername(UserJoinRequest.username) != null) {
+        if (userRepository.findOneWithAuthoritiesByUsername(UserJoinRequest.username!!) != null) {
             throw DuplicateMemberException("이미 가입되어 있는 유저입니다.")
         }
         val authority: Authority = Authority("ROLE_USER")
         val user: User = User(
-            name = UserJoinRequest.name,
-            password = passwordEncoder.encode(UserJoinRequest.password),
-            email = UserJoinRequest.email,
+            name = UserJoinRequest.name!!,
+            password = passwordEncoder.encode(UserJoinRequest.password!!),
+            email = UserJoinRequest.email!!,
             username = UserJoinRequest.username,
             authorities = Collections.singleton(authority),
             is_deleted = false,
@@ -39,6 +39,7 @@ class UserService(private val userRepository: UserRepository, private val passwo
 
     @Transactional(readOnly = true)
     fun getMyUserWithAuthorities(): UserResponse? {
+        println(SecurityUtil.currentUsername)
         return UserResponse.from(SecurityUtil.currentUsername?.let {
             userRepository.findOneWithAuthoritiesByUsername(
                 it

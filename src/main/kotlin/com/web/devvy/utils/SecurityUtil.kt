@@ -16,8 +16,10 @@ object SecurityUtil {
                 return null
             }
             var username: String? = null
+            println(authentication.principal)
             if (authentication.principal is UserDetails) {
                 val springSecurityUser = authentication.principal as UserDetails
+
                 username = springSecurityUser.username
             } else if (authentication.principal is String) {
                 username = authentication.principal as String

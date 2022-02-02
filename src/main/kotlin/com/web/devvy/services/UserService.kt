@@ -6,6 +6,7 @@ import com.web.devvy.entity.User
 import com.web.devvy.exceptions.DuplicateMemberException
 import com.web.devvy.repository.UserRepository
 import com.web.devvy.utils.SecurityUtil
+import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -34,12 +35,11 @@ class UserService(private val userRepository: UserRepository, private val passwo
 
     @Transactional(readOnly = true)
     fun getUserWithAuthorities(username: String): UserResponse? {
-        return UserResponse.from(userRepository.findOneWithAuthoritiesByUsername(username))
+        return UserResponse.from(userRepository.findOneWithAuthoritiesByUsername(username) ?: throw UsernameNotFoundException("$username -> 데이터베이스에서 찾을 수 없습니다."))
     }
 
     @Transactional(readOnly = true)
     fun getMyUserWithAuthorities(): UserResponse? {
-        println(SecurityUtil.currentUsername)
         return UserResponse.from(SecurityUtil.currentUsername?.let {
             userRepository.findOneWithAuthoritiesByUsername(
                 it

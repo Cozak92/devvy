@@ -12,7 +12,6 @@ class UserDto {
         @field:NotEmpty val username: String?,
         @field:Email val email: String?,
         val is_deleted: Boolean?,
-
     )
 
 
@@ -22,8 +21,8 @@ class UserDto {
         @field:Email val email: String,
         @field:NotEmpty val authorities: Set<Authority>,
     ) {
-        companion object{
-            fun from(user: User?): UserResponse?{
+        companion object {
+            fun from(user: User?): UserResponse? {
                 return user?.let {
                     UserResponse(
                         name = user.name,

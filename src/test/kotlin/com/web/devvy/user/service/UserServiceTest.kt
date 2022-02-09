@@ -6,7 +6,7 @@ import com.web.devvy.entity.Authority
 import com.web.devvy.entity.User
 import com.web.devvy.exceptions.DuplicateMemberException
 import com.web.devvy.repository.UserRepository
-import com.web.devvy.services.UserService
+import com.web.devvy.services.user.UserPortImpl
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.extensions.spring.SpringExtension
@@ -20,12 +20,12 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.test.context.ContextConfiguration
 import java.util.*
 
-@ContextConfiguration(classes = [(UserService::class)])
+@ContextConfiguration(classes = [(UserPortImpl::class)])
 class UserServiceTest : BehaviorSpec() {
     override fun extensions() = listOf(SpringExtension)
 
     @Autowired
-    lateinit var userService: UserService
+    lateinit var userServiceImpl: UserPortImpl
 
     @MockkBean
     lateinit var passwordEncoder: PasswordEncoder
@@ -55,7 +55,7 @@ class UserServiceTest : BehaviorSpec() {
                     authorities = authority
                 )
 
-                val response = userService.signup(userJoinRequest)
+                val response = userServiceImpl.signup(userJoinRequest)
                 then("UserResponse를 리턴한다.") {
 
                     verify(exactly = 1) { userRepository.findOneWithAuthoritiesByUsername(any()) }
@@ -95,7 +95,7 @@ class UserServiceTest : BehaviorSpec() {
 
                 then("DuplicateMemberException을 예외로 던진다.") {
                     val exception = shouldThrowExactly<DuplicateMemberException> {
-                        userService.signup(userJoinRequest)
+                        userServiceImpl.signup(userJoinRequest)
                     }
                     verify(exactly = 1) { userRepository.findOneWithAuthoritiesByUsername(any()) }
                     verify(exactly = 0) { userRepository.save(any()) }
@@ -118,7 +118,7 @@ class UserServiceTest : BehaviorSpec() {
                     authorities = authority
                 )
                 then("유저 정보를 리턴한다.") {
-                    val response = userService.getUserWithAuthorities(username)
+                    val response = userServiceImpl.getUserWithAuthorities(username)
                     response shouldBe UserDto.UserResponse.from(
                         User(
                             name = "신승혁",
@@ -136,7 +136,7 @@ class UserServiceTest : BehaviorSpec() {
                 every { userRepository.findOneWithAuthoritiesByUsername(any()) } returns null
                 then("UsernameNotFoundException을 예외로 던진다.") {
                     val exception = shouldThrowExactly<UsernameNotFoundException> {
-                        userService.getUserWithAuthorities(username)
+                        userServiceImpl.getUserWithAuthorities(username)
                     }
                     exception.message shouldStartWith ("roo333")
                     verify(exactly = 1) { userRepository.findOneWithAuthoritiesByUsername(any()) }

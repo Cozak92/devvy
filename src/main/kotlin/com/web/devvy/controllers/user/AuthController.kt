@@ -1,7 +1,7 @@
 package com.web.devvy.controllers.user
 
-import com.web.devvy.Dto.User.UserDto
-import com.web.devvy.Dto.token.TokenDto
+import com.web.devvy.Dto.User.UserDto.*
+import com.web.devvy.Dto.token.TokenDto.*
 import com.web.devvy.jwt.JwtFilter
 import com.web.devvy.jwt.TokenProvider
 import org.springframework.http.HttpHeaders
@@ -24,13 +24,13 @@ class AuthController(
     private val authenticationManagerBuilder: AuthenticationManagerBuilder
 ) {
     @PostMapping("/authenticate")
-    fun authorize(@RequestBody @Valid LoginRequest: UserDto.LoginRequest): ResponseEntity<TokenDto.Token> {
+    fun authorize(@RequestBody @Valid LoginRequest: LoginRequest): ResponseEntity<Token> {
         val authenticationToken = UsernamePasswordAuthenticationToken(LoginRequest.username, LoginRequest.password)
         val authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken)
         SecurityContextHolder.getContext().authentication = authentication
         val jwt = tokenProvider.createToken(authentication)
         val httpHeaders = HttpHeaders()
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer $jwt")
-        return ResponseEntity(TokenDto.Token(jwt), httpHeaders, HttpStatus.OK)
+        return ResponseEntity(Token(jwt), httpHeaders, HttpStatus.OK)
     }
 }

@@ -1,8 +1,8 @@
 package com.web.devvy.controllers.user
 
-import com.web.devvy.Dto.User.UserDto.*
-import com.web.devvy.Dto.token.TokenDto1.*
 import com.web.devvy.jwt.JwtFilter
+import com.web.devvy.dto.user.UserDto.*
+import com.web.devvy.dto.token.TokenDto.*
 import com.web.devvy.jwt.TokenProvider
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus

@@ -1,5 +1,5 @@
 package com.web.devvy.controllers.user
-import com.web.devvy.Dto.User.UserDto.*
+import com.web.devvy.dto.user.UserDto.*
 import com.web.devvy.services.user.UserPort
 import org.springframework.http.ResponseEntity
 import org.springframework.security.access.prepost.PreAuthorize

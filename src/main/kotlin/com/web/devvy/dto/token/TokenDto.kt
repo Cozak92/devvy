@@ -1,4 +1,4 @@
-package com.web.devvy.Dto.token
+package com.web.devvy.dto.token
 
 class TokenDto() {
     data class Token(val token:String)

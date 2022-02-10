@@ -1,7 +1,7 @@
 package com.web.devvy.user.service
 
 import com.ninjasquad.springmockk.MockkBean
-import com.web.devvy.Dto.User.UserDto
+import com.web.devvy.dto.user.UserDto
 import com.web.devvy.entity.Authority
 import com.web.devvy.entity.User
 import com.web.devvy.exceptions.DuplicateMemberException

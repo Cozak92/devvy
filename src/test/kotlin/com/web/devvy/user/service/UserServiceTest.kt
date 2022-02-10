@@ -6,6 +6,7 @@ import com.web.devvy.entity.Authority
 import com.web.devvy.entity.User
 import com.web.devvy.exceptions.DuplicateMemberException
 import com.web.devvy.repository.UserRepository
+import com.web.devvy.repository.UserRepositoryPort
 import com.web.devvy.services.user.UserPortImpl
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.BehaviorSpec
@@ -31,7 +32,7 @@ class UserServiceTest : BehaviorSpec() {
     lateinit var passwordEncoder: PasswordEncoder
 
     @MockkBean
-    lateinit var userRepository: UserRepository
+    lateinit var userRepositoryPort: UserRepositoryPort
 
     init {
         given("유저 가입 요청이 들어왔을 때") {
@@ -45,8 +46,8 @@ class UserServiceTest : BehaviorSpec() {
             `when`("UserService의 signup을 호출하면") {
                 val authority = Collections.singleton(Authority("ROLE_USER"))
                 every { passwordEncoder.encode(any()) } returns "1"
-                every { userRepository.findOneWithAuthoritiesByUsername(any()) } returns null
-                every { userRepository.save(any()) } returns User(
+                every { userRepositoryPort.findOneWithAuthoritiesByUsername(any()) } returns null
+                every { userRepositoryPort.save(any()) } returns User(
                     name = userJoinRequest.name!!,
                     password = passwordEncoder.encode(userJoinRequest.password!!),
                     email = userJoinRequest.email!!,
@@ -58,8 +59,8 @@ class UserServiceTest : BehaviorSpec() {
                 val response = userServiceImpl.signup(userJoinRequest)
                 then("UserResponse를 리턴한다.") {
 
-                    verify(exactly = 1) { userRepository.findOneWithAuthoritiesByUsername(any()) }
-                    verify(exactly = 1) { userRepository.save(any()) }
+                    verify(exactly = 1) { userRepositoryPort.findOneWithAuthoritiesByUsername(any()) }
+                    verify(exactly = 1) { userRepositoryPort.save(any()) }
 
                     response shouldBe UserDto.UserResponse.from(
                         User(
@@ -76,7 +77,7 @@ class UserServiceTest : BehaviorSpec() {
             `when`("이미 유저가 있다면") {
                 val authority = Collections.singleton(Authority("ROLE_USER"))
                 every { passwordEncoder.encode(any()) } returns "1"
-                every { userRepository.findOneWithAuthoritiesByUsername(any()) } returns User(
+                every { userRepositoryPort.findOneWithAuthoritiesByUsername(any()) } returns User(
                     name = "신승혁",
                     password = "1234",
                     username = "cozak",
@@ -84,7 +85,7 @@ class UserServiceTest : BehaviorSpec() {
                     is_deleted = false,
                     authorities = authority
                 )
-                every { userRepository.save(any()) } returns User(
+                every { userRepositoryPort.save(any()) } returns User(
                     name = userJoinRequest.name!!,
                     password = passwordEncoder.encode(userJoinRequest.password!!),
                     email = userJoinRequest.email!!,
@@ -97,8 +98,8 @@ class UserServiceTest : BehaviorSpec() {
                     val exception = shouldThrowExactly<DuplicateMemberException> {
                         userServiceImpl.signup(userJoinRequest)
                     }
-                    verify(exactly = 1) { userRepository.findOneWithAuthoritiesByUsername(any()) }
-                    verify(exactly = 0) { userRepository.save(any()) }
+                    verify(exactly = 1) { userRepositoryPort.findOneWithAuthoritiesByUsername(any()) }
+                    verify(exactly = 0) { userRepositoryPort.save(any()) }
 
                     exception.message shouldBe ("이미 가입되어 있는 유저입니다.")
                 }
@@ -109,7 +110,7 @@ class UserServiceTest : BehaviorSpec() {
             val username = "roo333"
             `when`("유저를 찾았다면") {
                 val authority = Collections.singleton(Authority("ROLE_USER"))
-                every { userRepository.findOneWithAuthoritiesByUsername(any()) } returns User(
+                every { userRepositoryPort.findOneWithAuthoritiesByUsername(any()) } returns User(
                     name = "신승혁",
                     password = "1234",
                     username = "roo333",
@@ -129,17 +130,17 @@ class UserServiceTest : BehaviorSpec() {
                             authorities = authority
                         )
                     )
-                    verify(exactly = 1) { userRepository.findOneWithAuthoritiesByUsername(any()) }
+                    verify(exactly = 1) { userRepositoryPort.findOneWithAuthoritiesByUsername(any()) }
                 }
             }
             `when`("유저를 못찾았다면") {
-                every { userRepository.findOneWithAuthoritiesByUsername(any()) } returns null
+                every { userRepositoryPort.findOneWithAuthoritiesByUsername(any()) } returns null
                 then("UsernameNotFoundException을 예외로 던진다.") {
                     val exception = shouldThrowExactly<UsernameNotFoundException> {
                         userServiceImpl.getUserWithAuthorities(username)
                     }
                     exception.message shouldStartWith ("roo333")
-                    verify(exactly = 1) { userRepository.findOneWithAuthoritiesByUsername(any()) }
+                    verify(exactly = 1) { userRepositoryPort.findOneWithAuthoritiesByUsername(any()) }
                 }
             }
         }

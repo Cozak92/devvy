@@ -1,5 +1,5 @@
 package com.web.devvy.Dto.token
 
 class TokenDto() {
-    data class Token(private val token:String)
+    data class Token(val token:String)
 }

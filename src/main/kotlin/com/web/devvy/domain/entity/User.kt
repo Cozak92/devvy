@@ -1,33 +1,28 @@
-package com.web.devvy.infrastructure.persistence.entity
+package com.web.devvy.domain.entity
 
-import lombok.AllArgsConstructor
-import lombok.NoArgsConstructor
+import com.web.devvy.domain.vo.User.*
 import javax.persistence.*
-import com.web.devvy.infrastructure.persistence.entity.Authority
 
 @Entity
-@Table(name = "user")
-@AllArgsConstructor
-@NoArgsConstructor
 class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long? = null,
+    val id: UserId? = null,
 
     @Column(nullable = false, length = 25)
-    var username: String,
+    val username: Username,
 
 
     @Column(nullable = false, length = 300)
-    var password: String,
+    val password: UserPassword,
 
     @Column(nullable = false, length = 25)
-    var name: String,
+    val name: Name,
 
     @Column(nullable = false, length = 50)
-    var email: String,
+    val email: UserEmail,
 
-    var is_deleted: Boolean,
+    val isDeleted: IsDeleted,
 
     @ManyToMany
     @JoinTable(
@@ -55,6 +50,6 @@ class User(
     }
 
     override fun toString(): String {
-        return "User(id=$id, name='$name', email='$email' is_deleted='$is_deleted)"
+        return "User(id=$id, name='$name', email='$email' is_deleted='$isDeleted)"
     }
 }

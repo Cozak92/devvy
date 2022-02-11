@@ -1,10 +1,10 @@
 package com.web.devvy.user.service
 
 import com.ninjasquad.springmockk.MockkBean
-import com.web.devvy.application.service.user.UserPortImpl
-import com.web.devvy.infrastructure.persistence.entity.Authority
-import com.web.devvy.infrastructure.persistence.entity.User
-import com.web.devvy.infrastructure.persistence.repository.UserRepositoryPort
+import com.web.devvy.application.service.user.UserService
+import com.web.devvy.domain.entity.Authority
+import com.web.devvy.domain.entity.User
+import com.web.devvy.infrastructure.persistence.repository.SaveUserPort
 import com.web.devvy.rest.controller.exceptions.DuplicateMemberException
 import com.web.devvy.rest.model.user.UserDto
 import io.kotest.assertions.throwables.shouldThrowExactly
@@ -20,18 +20,18 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.test.context.ContextConfiguration
 import java.util.*
 
-@ContextConfiguration(classes = [(UserPortImpl::class)])
+@ContextConfiguration(classes = [(UserService::class)])
 class UserServiceTest : BehaviorSpec() {
     override fun extensions() = listOf(SpringExtension)
 
     @Autowired
-    lateinit var userServiceImpl: UserPortImpl
+    lateinit var userServiceImpl: UserService
 
     @MockkBean
     lateinit var passwordEncoder: PasswordEncoder
 
     @MockkBean
-    lateinit var userRepositoryPort: UserRepositoryPort
+    lateinit var userRepositoryPort: SaveUserPort
 
     init {
         given("유저 가입 요청이 들어왔을 때") {
@@ -51,7 +51,7 @@ class UserServiceTest : BehaviorSpec() {
                     password = passwordEncoder.encode(userJoinRequest.password!!),
                     email = userJoinRequest.email!!,
                     username = userJoinRequest.username!!,
-                    is_deleted = false,
+                    isDeleted = false,
                     authorities = authority
                 )
 
@@ -67,7 +67,7 @@ class UserServiceTest : BehaviorSpec() {
                             password = "1234",
                             username = "cozak",
                             email = "cozak92@gmail.com",
-                            is_deleted = false,
+                            isDeleted = false,
                             authorities = authority
                         )
                     )
@@ -81,7 +81,7 @@ class UserServiceTest : BehaviorSpec() {
                     password = "1234",
                     username = "cozak",
                     email = "cozak92@gmail.com",
-                    is_deleted = false,
+                    isDeleted = false,
                     authorities = authority
                 )
                 every { userRepositoryPort.save(any()) } returns User(
@@ -89,7 +89,7 @@ class UserServiceTest : BehaviorSpec() {
                     password = passwordEncoder.encode(userJoinRequest.password!!),
                     email = userJoinRequest.email!!,
                     username = userJoinRequest.username!!,
-                    is_deleted = false,
+                    isDeleted = false,
                     authorities = authority
                 )
 
@@ -114,7 +114,7 @@ class UserServiceTest : BehaviorSpec() {
                     password = "1234",
                     username = "roo333",
                     email = "cozak92@gmail.com",
-                    is_deleted = false,
+                    isDeleted = false,
                     authorities = authority
                 )
                 then("유저 정보를 리턴한다.") {
@@ -125,7 +125,7 @@ class UserServiceTest : BehaviorSpec() {
                             password = "1234",
                             username = "roo333",
                             email = "cozak92@gmail.com",
-                            is_deleted = false,
+                            isDeleted = false,
                             authorities = authority
                         )
                     )

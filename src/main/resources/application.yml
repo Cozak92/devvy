@@ -6,7 +6,7 @@ spring:
   datasource:
     url: jdbc:mysql://devvydb-1.ccul8tlktijr.ap-northeast-2.rds.amazonaws.com:3306/devyyyyy
     username: admin
-    password: tlstmdgur11
+    password: "!tlstmdgur11"
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:

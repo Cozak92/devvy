@@ -1,4 +1,4 @@
-package com.web.devvy.utils
+package com.web.devvy.infrastructure.utils
 
 import org.slf4j.LoggerFactory
 import org.springframework.security.core.context.SecurityContextHolder

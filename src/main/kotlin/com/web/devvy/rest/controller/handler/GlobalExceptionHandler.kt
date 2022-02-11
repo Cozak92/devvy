@@ -1,4 +1,4 @@
-package com.web.devvy.handler
+package com.web.devvy.rest.controller.handler
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

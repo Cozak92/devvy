@@ -1,4 +1,4 @@
-package com.web.devvy.entity
+package com.web.devvy.infrastructure.persistence.entity
 
 import lombok.AllArgsConstructor
 import lombok.NoArgsConstructor

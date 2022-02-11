@@ -1,12 +1,12 @@
 package com.web.devvy.user.service
 
 import com.ninjasquad.springmockk.MockkBean
-import com.web.devvy.dto.user.UserDto
-import com.web.devvy.entity.Authority
-import com.web.devvy.entity.User
-import com.web.devvy.exceptions.DuplicateMemberException
-import com.web.devvy.repository.UserRepository
-import com.web.devvy.services.user.UserPortImpl
+import com.web.devvy.rest.model.user.UserDto
+import com.web.devvy.infrastructure.persistence.entity.Authority
+import com.web.devvy.infrastructure.persistence.entity.User
+import com.web.devvy.rest.controller.exceptions.DuplicateMemberException
+import com.web.devvy.infrastructure.persistence.repository.UserRepository
+import com.web.devvy.application.service.user.UserPortImpl
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.extensions.spring.SpringExtension

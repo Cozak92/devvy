@@ -1,4 +1,4 @@
-package com.web.devvy.exceptions
+package com.web.devvy.rest.controller.exceptions
 
 class DuplicateMemberException : RuntimeException {
     constructor() : super() {}

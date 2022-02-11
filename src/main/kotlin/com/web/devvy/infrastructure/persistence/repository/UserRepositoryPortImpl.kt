@@ -1,7 +1,7 @@
-package com.web.devvy.repository
+package com.web.devvy.infrastructure.persistence.repository
 
-import com.web.devvy.entity.User
-import com.web.devvy.repository.UserRepository
+import com.web.devvy.infrastructure.persistence.entity.User
+import com.web.devvy.infrastructure.persistence.repository.UserRepository
 
 class UserRepositoryPortImpl(private val userRepository: UserRepository): UserRepositoryPort {
     override fun findByEmail(email: String): User? {

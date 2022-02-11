@@ -1,4 +1,4 @@
-package com.web.devvy.handler
+package com.web.devvy.rest.controller.handler
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.time.LocalDateTime

@@ -1,4 +1,4 @@
-package com.web.devvy.handler
+package com.web.devvy.rest.controller.handler
 
 data class Error(
     var field: String? = null,

@@ -1,6 +1,6 @@
-package com.web.devvy.controllers.user
-import com.web.devvy.dto.user.UserDto.*
-import com.web.devvy.services.user.UserPort
+package com.web.devvy.rest.controller.user
+import com.web.devvy.rest.model.user.UserDto.*
+import com.web.devvy.application.service.user.UserPort
 import org.springframework.http.ResponseEntity
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*

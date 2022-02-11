@@ -1,7 +1,7 @@
-package com.web.devvy.services
+package com.web.devvy.application.service
 
-import com.web.devvy.repository.UserRepository
-import com.web.devvy.entity.User
+import com.web.devvy.infrastructure.persistence.repository.UserRepository
+import com.web.devvy.infrastructure.persistence.entity.User
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails

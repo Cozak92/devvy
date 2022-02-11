@@ -1,7 +1,7 @@
-package com.web.devvy.dto.user
+package com.web.devvy.rest.model.user
 
-import com.web.devvy.entity.Authority
-import com.web.devvy.entity.User
+import com.web.devvy.infrastructure.persistence.entity.Authority
+import com.web.devvy.infrastructure.persistence.entity.User
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotEmpty
 
@@ -16,10 +16,10 @@ class UserDto {
 
 
     data class UserResponse(
-            @field:NotEmpty val name: String,
-            @field:NotEmpty val username: String,
-            @field:Email val email: String,
-            @field:NotEmpty val authorities: Set<Authority>,
+        @field:NotEmpty val name: String,
+        @field:NotEmpty val username: String,
+        @field:Email val email: String,
+        @field:NotEmpty val authorities: Set<Authority>,
     ) {
         companion object {
             fun from(user: User?): UserResponse? {

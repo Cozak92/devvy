@@ -4,9 +4,9 @@ import com.web.devvy.domain.command.user.SignUpUserCommand
 import com.web.devvy.rest.model.user.UserDto.*
 import com.web.devvy.domain.entity.Authority
 import com.web.devvy.domain.entity.User
-import com.web.devvy.domain.vo.User.Authorities
-import com.web.devvy.domain.vo.User.IsDeleted
-import com.web.devvy.domain.vo.User.UserPassword
+import com.web.devvy.domain.vo.user.Authorities
+import com.web.devvy.domain.vo.user.IsDeleted
+import com.web.devvy.domain.vo.user.UserPassword
 import com.web.devvy.infrastructure.persistence.repository.GetAuthoritiesPort
 import com.web.devvy.rest.controller.exceptions.DuplicateMemberException
 import com.web.devvy.infrastructure.persistence.repository.SaveUserPort
@@ -33,7 +33,7 @@ class UserService(private val userSavePort: SaveUserPort, private val getAuthori
                 password = UserPassword(passwordEncoder.encode(signUpUserCommand.password!!.value)),
                 email = signUpUserCommand.email!!,
                 username = signUpUserCommand.username,
-                authorities = Collections.singleton(authority),
+                authorities = Authorities(Collections.singleton(authority)),
                 isDeleted = IsDeleted(false),
         )
 

@@ -1,4 +1,4 @@
-package com.web.devvy.domain.vo.User
+package com.web.devvy.domain.vo.user
 
 import javax.persistence.Embeddable
 

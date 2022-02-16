@@ -25,7 +25,7 @@ class CustomUserDetailsService(private val importedUserJpaRepository: ImportedUs
       if (user.isDeleted.value) {
          throw RuntimeException("$username -> 활성화되어 있지 않습니다.")
       }
-      val grantedAuthorities: List<GrantedAuthority> = user.authorities.stream()
+      val grantedAuthorities: List<GrantedAuthority> = user.authorities.value.stream()
          .map { authority -> SimpleGrantedAuthority(authority.authorityName) }
          .collect(Collectors.toList())
       return org.springframework.security.core.userdetails.User(

@@ -18,10 +18,10 @@ class UserDto {
             fun from(user: User?): UserResponse? {
                 return user?.let {
                     UserResponse(
-                            name = user.name.value,
-                            username = user.username.value,
-                            email = user.email.value,
-                            authorities = user.authorities
+                        name = user.name.value,
+                        username = user.username.value,
+                        email = user.email.value,
+                        authorities = user.authorities.value
                     )
                 }
             }

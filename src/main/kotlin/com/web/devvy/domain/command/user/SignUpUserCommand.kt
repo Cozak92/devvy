@@ -1,6 +1,6 @@
 package com.web.devvy.domain.command.user
 
-import com.web.devvy.domain.vo.User.*
+import com.web.devvy.domain.vo.user.*
 
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotEmpty
